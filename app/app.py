@@ -3,12 +3,20 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/', methods=['GET', 'POST'])
-def index():
-    dice_result = None
+@app.route('/')
+def hello_world():
+    return 'Hello, World!'
+
+@app.route('/dice', methods=['GET', 'POST'])
+def dice():
+    number = None
     if request.method == 'POST':
-        dice_result = random.randint(1, 6)
-    return render_template('index.html', dice=dice_result)
+        number = random.randint(1, 6)
+    return render_template('dice.html', rolled=bool(number), number=number)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
+    
+def test_dice_route(client):
+    response = client.get('/dice')
+    assert response.status_code == 200

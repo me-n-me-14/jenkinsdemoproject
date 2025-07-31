@@ -1,0 +1,17 @@
+<!-- templates/dice.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dice Roller</title>
+</head>
+<body>
+    <h1>🎲 Dice Roller</h1>
+    <form method="post">
+        <button type="submit">Roll the Dice</button>
+    </form>
+
+    {% if rolled %}
+        <h2>You rolled: {{ number }}</h2>
+    {% endif %}
+</body>
+</html>
