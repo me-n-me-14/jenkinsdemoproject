@@ -7,6 +7,7 @@ def client():
     with app.test_client() as client:
         yield client
 
-def test_hello_world(client):
+def test_dice_game(client):
     rv = client.get('/')
-    assert b'Hello, World!' in rv.data
+    assert b'Dice Roller' in rv.data
+    assert b'Roll the Dice' in rv.data
