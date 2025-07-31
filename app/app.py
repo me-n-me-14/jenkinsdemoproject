@@ -1,14 +1,18 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import random
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    dice1 = random.randint(1, 6)
-    dice2 = random.randint(1, 6)
-    total = dice1 + dice2
-    return render_template('dice.html', dice1=dice1, dice2=dice2, total=total)
+    rolled = False
+    number = None
+
+    if request.method == 'POST':
+        number = random.randint(1, 6)
+        rolled = True
+
+    return render_template('dice.html', number=number, rolled=rolled)
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
