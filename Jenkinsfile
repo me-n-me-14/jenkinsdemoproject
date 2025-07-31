@@ -6,11 +6,6 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
-            steps {
-                git 'https://github.com/me-n-me-14/jenkinsdemoproject.git'
-            }
-        }
         stage('Install Dependencies') {
             steps {
                 bat 'echo PYTHON_HOME is: %PYTHON_HOME%'
