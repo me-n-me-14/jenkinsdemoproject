@@ -1,17 +1,76 @@
-<!-- templates/dice.html -->
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Dice Roller</title>
+    <style>
+        .dice-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+
+        .dice {
+            width: 100px;
+            height: 100px;
+            margin: 10px;
+            font-size: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid #333;
+            border-radius: 10px;
+            background: #fff;
+            transition: transform 0.4s ease;
+        }
+
+        .rolling {
+            animation: roll 0.5s infinite;
+        }
+
+        @keyframes roll {
+            0%   { transform: rotate(0deg); }
+            25%  { transform: rotate(90deg); }
+            50%  { transform: rotate(180deg); }
+            75%  { transform: rotate(270deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 </head>
 <body>
     <h1>🎲 Dice Roller</h1>
-    <form method="post">
-        <button type="submit">Roll the Dice</button>
-    </form>
+<form id="roll-form" method="post">
+    <button type="submit">Roll the Dice</button>
+</form>
+
+
+    <div class="dice-container">
+        <div class="dice" id="dice1" aria-label="Dice 1">🎲</div>
+        <div class="dice" id="dice2" aria-label="Dice 2">🎲</div>
+    </div>
 
     {% if rolled %}
-        <h2>You rolled: {{ number }}</h2>
+        <script>
+            const diceFaces = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
+            const dice1Elem = document.getElementById('dice1');
+            const dice2Elem = document.getElementById('dice2');
+
+            // Start animation
+            dice1Elem.classList.add('rolling');
+            dice2Elem.classList.add('rolling');
+
+            setTimeout(() => {
+                dice1Elem.classList.remove('rolling');
+                dice2Elem.classList.remove('rolling');
+
+                // Set final roll
+                const dice1Value = Number('{{ dice1|default:1|escapejs }}');
+                const dice2Value = Number('{{ dice2|default:1|escapejs }}');
+                dice1Elem.textContent = diceFaces[Math.max(0, Math.min(5, dice1Value - 1))];
+                dice2Elem.textContent = diceFaces[Math.max(0, Math.min(5, dice2Value - 1))];
+            }, 1000);
+        </script>
     {% endif %}
 </body>
 </html>
