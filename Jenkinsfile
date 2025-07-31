@@ -1,23 +1,26 @@
 pipeline {
     agent any
 
+    environment {
+        PYTHON_HOME = 'C:\\Users\\misha\\AppData\\Local\\Programs\\Python\\Python313'
+    }
+
     stages {
         stage('Install Dependencies') {
             steps {
                 bat 'echo PYTHON_HOME is: %PYTHON_HOME%'
-                bat '"%PYTHON_HOME%/Scripts/pip" install -r app/requirements.txt'
-                bat '"%PYTHON_HOME%/Scripts/pip" install -r tests/requirements.txt'
-                bat '"C:/Users/misha/AppData/Local/Programs/Python/Python313/python.exe" install -r app/requirements.txt'
+                bat '"%PYTHON_HOME%\\python.exe" -m pip install -r app/requirements.txt'
+                bat '"%PYTHON_HOME%\\python.exe" -m pip install -r tests/requirements.txt'
             }
         }
         stage('Test') {
             steps {
-                bat '"%PYTHON_HOME%/Scripts/pytest" tests/test_app.py'
+                bat '"%PYTHON_HOME%\\python.exe" -m pytest tests/test_app.py'
             }
         }
         stage('Deploy') {
             steps {
-                bat '"%PYTHON_HOME%/python" -u app/app.py'
+                bat '"%PYTHON_HOME%\\python.exe" -u app/app.py'
             }
         }
     }
