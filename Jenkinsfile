@@ -7,6 +7,7 @@ pipeline {
                 bat 'echo PYTHON_HOME is: %PYTHON_HOME%'
                 bat '"%PYTHON_HOME%/Scripts/pip" install -r app/requirements.txt'
                 bat '"%PYTHON_HOME%/Scripts/pip" install -r tests/requirements.txt'
+                bat '"C:\Users\misha\AppData\Local\Programs\Python\Python313\python.exe" install -r app/requirements.txt
             }
         }
         stage('Test') {
