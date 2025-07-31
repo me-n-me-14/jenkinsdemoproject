@@ -3,7 +3,7 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/')
+@app.route('/', methods=['GET', 'POST'])
 def index():
     dice1 = random.randint(1, 6)
     dice2 = random.randint(1, 6)
