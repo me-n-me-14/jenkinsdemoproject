@@ -3,6 +3,7 @@ import random
 
 app = Flask(__name__)
 
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     rolled = False
@@ -14,7 +15,13 @@ def index():
         dice2 = random.randint(1, 6)
         rolled = True
 
-    return render_template('dice.html', dice1=dice1, dice2=dice2, rolled=rolled)
+    return render_template(
+        'dice.html',
+        dice1=dice1,
+        dice2=dice2,
+        rolled=rolled
+    )
+
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0')
