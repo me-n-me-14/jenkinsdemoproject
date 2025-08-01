@@ -1,25 +1,25 @@
 pipeline {
     agent any
 
-    tools {
-        python 'python3'
+    environment {
+        PYTHON_HOME = 'C:\Users\misha\AppData\Local\Programs\Python\Python313'
     }
 
     stages {
         stage('Install Dependencies') {
             steps {
-                bat 'python -m pip install -r app/requirements.txt'
-                bat 'python -m pip install -r tests/requirements.txt'
+                bat '"%PYTHON_HOME%\python.exe" -m pip install -r app/requirements.txt'
+                bat '"%PYTHON_HOME%\python.exe" -m pip install -r tests/requirements.txt'
             }
         }
         stage('Lint') {
             steps {
-                bat 'python -m flake8 .'
+                bat '"%PYTHON_HOME%\python.exe" -m flake8 .'
             }
         }
         stage('Test') {
             steps {
-                bat 'python -m pytest tests/test_app.py'
+                bat '"%PYTHON_HOME%\python.exe" -m pytest tests/test_app.py'
             }
         }
         stage('Build') {
