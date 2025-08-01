@@ -51,6 +51,7 @@
     </div>
 
     {% if rolled %}
+        <p>You rolled a {{ dice1 }} and a {{ dice2 }}</p>
         <script>
             const diceFaces = ['\u2680', '\u2681', '\u2682', '\u2683', '\u2684', '\u2685'];
             const dice1Elem = document.getElementById('dice1');
@@ -65,8 +66,8 @@
                 dice2Elem.classList.remove('rolling');
 
                 // Set final roll
-                const dice1Value = Number('{{ dice1|default:1|escapejs }}');
-                const dice2Value = Number('{{ dice2|default:1|escapejs }}');
+                const dice1Value = Number('{{ dice1|default(1) }}');
+                const dice2Value = Number('{{ dice2|default(1) }}');
                 dice1Elem.textContent = diceFaces[Math.max(0, Math.min(5, dice1Value - 1))];
                 dice2Elem.textContent = diceFaces[Math.max(0, Math.min(5, dice2Value - 1))];
             }, 1000);
