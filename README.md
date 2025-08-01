@@ -8,4 +8,4 @@ This is a sample project to demonstrate a CI/CD pipeline using Jenkins.
 * `tests/`: Contains tests for the application.
 * `scripts/`: Can be used for any additional scripts.
 * `Dockerfile`: Defines the Docker image for the application.
-* `Jenkinsfile`: Defines the Jenkins pipeline.
+* `Jenkinsfile`: Defines the Jenkins pipeline.osdnskj
